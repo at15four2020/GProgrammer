@@ -57,7 +57,7 @@ public class ExecuteScript {
     }
     public void runScript(String script) throws ScriptException {
     	engine.setBindings(engine.createBindings(), ScriptContext.ENGINE_SCOPE);
-        engine.eval(new InputStreamReader(getClass().getResourceAsStream("/script/base.js")));
+        engine.eval(new InputStreamReader(getClass().getResourceAsStream("/script/base.gprog.js")));
         engine.eval(script);
     }
     
