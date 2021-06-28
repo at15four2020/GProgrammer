@@ -284,4 +284,4 @@ function HPacketToServer(headerName, bytesOrObjects) {
  */
 function HPacketToClient(headerName, bytesOrObjects) {
 	return HPacket(headerName, bytesOrObjects, TOCLIENT)
-}
+}

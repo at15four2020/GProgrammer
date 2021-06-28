@@ -31,7 +31,7 @@
                   <Menu mnemonicParsing="false" text="Load utils">
                     <items>
                         <MenuItem disable="true" mnemonicParsing="false" onAction="#handleImport" text="Features" />
-                      <MenuItem mnemonicParsing="false" onAction="#handleImport" text="setTimeout" />
+                      <MenuItem mnemonicParsing="false" onAction="#handleImport" text="setTimeout and setInterval" />
                         <MenuItem mnemonicParsing="false" onAction="#handleImport" text="Promise" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem disable="true" mnemonicParsing="false" text="Libraries" />
