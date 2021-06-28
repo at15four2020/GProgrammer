@@ -171,6 +171,10 @@ public class GProgrammer extends ExtensionForm {
         }
     }
 
+    public void handleClear() {
+        looger.clear();
+    }
+
     public void handleImport(ActionEvent e) {
         MenuItem item = (MenuItem) e.getSource();
         String text = item.getText();

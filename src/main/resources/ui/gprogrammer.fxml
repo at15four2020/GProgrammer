@@ -49,6 +49,11 @@
                                 <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#handleClear" text="Clear log">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
                         <CheckMenuItem mnemonicParsing="false" onAction="#handlePreserveLog" selected="true" text="Preserve log" />
                     </items>
                 </Menu>
