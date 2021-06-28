@@ -56,7 +56,12 @@ public class GProgrammer extends ExtensionForm {
 
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/gprogrammer.png")));
 
-        primaryStage.setTitle("GProgrammer");
+        StringBuilder title = new StringBuilder();
+        ExtensionInfo info = getClass().getAnnotation(ExtensionInfo.class);
+        title.append(info.Title());
+        title.append(" v");
+        title.append(info.Version());
+        primaryStage.setTitle(title.toString());
         primaryStage.setScene(new Scene(root));
 
         myStage = primaryStage;
