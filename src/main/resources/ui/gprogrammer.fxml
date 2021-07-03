@@ -49,6 +49,11 @@
                                 <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#handleStop" text="Stop script (needs implementation)" disable="true" >
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="ESCAPE" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#handleClear" text="Clear log">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />

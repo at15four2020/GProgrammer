@@ -174,6 +174,9 @@ public class GProgrammer extends ExtensionForm {
         }
     }
 
+
+    public void handleStop() {}
+
     public void handleClear() {
         looger.clear();
     }
