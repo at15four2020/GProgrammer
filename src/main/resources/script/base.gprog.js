@@ -148,7 +148,17 @@ function _intercepted(message) {
 	if (!handlers) return
 
 	handlers.forEach(function (handler) {
-		handler.call(null, message)
+            try {
+                handler.call(null, message)
+            } catch(e) {
+                print("Script fail -->\n\n")
+                print(e)
+                if (getBytes) {
+                    print("\nHere is the packet in bytes:\n")
+                    print(getBytes(message.getPacket()))
+                }
+                print("\n\n<-- Script fail\n")
+            }
 	})
 }
 
