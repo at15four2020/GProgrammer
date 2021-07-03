@@ -3,11 +3,11 @@ package G_Earth.GProgrammer;
 import java.io.InputStreamReader;
 import javax.script.*;
 
-import gearth.misc.harble_api.HarbleAPI;
-import gearth.misc.harble_api.HarbleAPI.HarbleMessage;
 import gearth.protocol.HMessage;
 import gearth.protocol.HPacket;
 import gearth.protocol.HMessage.Direction;
+import gearth.services.packet_info.PacketInfo;
+import gearth.services.packet_info.PacketInfoManager;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 public class ExecuteScript {
@@ -44,10 +44,10 @@ public class ExecuteScript {
     private static HandleSend send;
 
     public static ScriptOutput sw;
-    private static HarbleAPI harbleAPI;
+    private static PacketInfoManager packetInfoManager;
 
     public static Integer headerIdFromName(Direction side, String name) {
-        HarbleMessage message = harbleAPI.getHarbleMessageFromName(side, name);
+        PacketInfo message = packetInfoManager.getPacketInfoFromName(side, name);
         if (message != null) {
             return message.getHeaderId();
         }
@@ -79,8 +79,8 @@ public class ExecuteScript {
         }
     }
 
-    public void setHarbleAPI(HarbleAPI harbleAPI) {
-        ExecuteScript.harbleAPI = harbleAPI;
+    public void setPacketInfoManager(PacketInfoManager packetInfoManager) {
+        ExecuteScript.packetInfoManager = packetInfoManager;
     }
 
     public static String getBytes(HPacket packet) {

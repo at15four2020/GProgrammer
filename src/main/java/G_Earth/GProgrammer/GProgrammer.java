@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 
 import gearth.extensions.ExtensionForm;
 import gearth.extensions.ExtensionInfo;
-import gearth.misc.harble_api.HarbleAPI;
 import gearth.protocol.HPacket;
 import gearth.protocol.HMessage.Direction;
 
@@ -71,9 +70,8 @@ public class GProgrammer extends ExtensionForm {
 
     @Override
     protected void initExtension() {
-        onConnect((host, port, hotelversion, cachePath) -> {
-            HarbleAPI harbleAPI = new HarbleAPI(hotelversion, cachePath);
-            runningScript.setHarbleAPI(harbleAPI);
+        onConnect((host, port, hotelversion, clientIdentifier, clientType, packetInfoManager) -> {
+            runningScript.setPacketInfoManager(packetInfoManager);
         });
     }
 
