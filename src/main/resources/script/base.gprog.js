@@ -4,13 +4,13 @@ importPackage("G_Earth.GProgrammer");
 print('Welocme to ECMAScript 6 world!\n');
 
 function loadScript(name) {
-	if (name == undefined) return
+    if (name == undefined) return
 
-	load('classpath:script/' + name + '.gprog.js');
+    load('classpath:script/' + name + '.gprog.js');
 }
 
 function clear() {
-	ExecuteScript.sw.clear()
+    ExecuteScript.sw.clear()
 }
 
 /**
@@ -140,26 +140,26 @@ var _toServerListeners = {};
  * @param {GEarthHMessage} message
  */
 function _intercepted(message) {
-	var side = message.getDestination()
-	var packet = message.getPacket()
-	var sideListeners = side == TOCLIENT ? _toClientListeners : _toServerListeners
-	var handlers = sideListeners[packet.headerId()]
+    var side = message.getDestination()
+    var packet = message.getPacket()
+    var sideListeners = side == TOCLIENT ? _toClientListeners : _toServerListeners
+    var handlers = sideListeners[packet.headerId()]
 
-	if (!handlers) return
+    if (!handlers) return
 
-	handlers.forEach(function (handler) {
-            try {
-                handler.call(null, message)
-            } catch(e) {
-                print("Script fail -->\n\n")
-                print(e)
-                if (getBytes) {
-                    print("\nHere is the packet in bytes:\n")
-                    print(getBytes(message.getPacket()))
-                }
-                print("\n\n<-- Script fail\n")
+    handlers.forEach(function (handler) {
+        try {
+            handler.call(null, message)
+        } catch (e) {
+            print("Script fail -->\n\n")
+            print(e)
+            if (getBytes) {
+                print("\nHere is the packet in bytes:\n")
+                print(getBytes(message.getPacket()))
             }
-	})
+            print("\n\n<-- Script fail\n")
+        }
+    })
 }
 
 /**
@@ -170,26 +170,26 @@ function _intercepted(message) {
  * @param {function(GEarthHMessage)} handler
  */
 function intercept(direction, headerIdOrName, handler) {
-	if (headerIdOrName == undefined || handler == undefined) return
+    if (headerIdOrName == undefined || handler == undefined) return
 
-	var realHeaderId = headerIdOrName
-	if (typeof headerIdOrName == "string") {
-		realHeaderId = ExecuteScript.headerIdFromName(direction, headerIdOrName)
+    var realHeaderId = headerIdOrName
+    if (typeof headerIdOrName == "string") {
+        realHeaderId = ExecuteScript.headerIdFromName(direction, headerIdOrName)
 
-		if (realHeaderId == -1) {
-			throw new Error("Header id not found for " + headerIdOrName)
-		}
-	}
+        if (realHeaderId == -1) {
+            throw new Error("Header id not found for " + headerIdOrName)
+        }
+    }
 
-	var listeners = direction == TOSERVER ? _toServerListeners : _toClientListeners
+    var listeners = direction == TOSERVER ? _toServerListeners : _toClientListeners
 
-	if (!listeners[realHeaderId]) {
-		listeners[realHeaderId] = []
+    if (!listeners[realHeaderId]) {
+        listeners[realHeaderId] = []
 
-		ExecuteScript.intercept(direction, realHeaderId);
-	}
+        ExecuteScript.intercept(direction, realHeaderId);
+    }
 
-	listeners[realHeaderId].push(handler);
+    listeners[realHeaderId].push(handler);
 }
 
 /**
@@ -199,7 +199,7 @@ function intercept(direction, headerIdOrName, handler) {
  * @param {function(GEarthHMessage)} handler
  */
 function interceptToClient(headerIdOrName, handler) {
-	return intercept(TOCLIENT, headerIdOrName, handler)
+    return intercept(TOCLIENT, headerIdOrName, handler)
 }
 
 
@@ -210,7 +210,7 @@ function interceptToClient(headerIdOrName, handler) {
  * @param {function(GEarthHMessage)} handler
  */
 function interceptToServer(headerIdOrName, handler) {
-	return intercept(TOSERVER, headerIdOrName, handler)
+    return intercept(TOSERVER, headerIdOrName, handler)
 }
 
 /**
@@ -220,9 +220,9 @@ function interceptToServer(headerIdOrName, handler) {
  * @param {GEarthHPacket} packet
  */
 function send(direction, packet) {
-	if (packet == undefined) return
+    if (packet == undefined) return
 
-	ExecuteScript.send(direction, packet);
+    ExecuteScript.send(direction, packet);
 }
 
 /**
@@ -231,7 +231,7 @@ function send(direction, packet) {
  * @param {GEarthHPacket} packet
  */
 function sendToServer(packet) {
-	send(TOSERVER, packet);
+    send(TOSERVER, packet);
 }
 
 /**
@@ -240,7 +240,7 @@ function sendToServer(packet) {
  * @param {GEarthHPacket} packet
  */
 function sendToClient(packet) {
-	send(TOCLIENT, packet);
+    send(TOCLIENT, packet);
 }
 
 /**
@@ -252,26 +252,26 @@ function sendToClient(packet) {
  * @returns {GEarthHPacket}
  */
 function HPacket(headerIdOrName, bytesOrObjects, direction) {
-	var headerId = headerIdOrName
+    var headerId = headerIdOrName
 
-	if (typeof headerIdOrName == "string") {
-		if (typeof direction != "undefined") {
-			headerId = ExecuteScript.headerIdFromName(direction, headerIdOrName)
-			if (headerId == -1) {
-				throw new Error("Unknown header id for " + headerIdOrName)
-			}
-		} else {
-			throw new Error("Cannot define the header id without the current direction.")
-		}
-	} else if (["undefined", "number"].indexOf(typeof headerIdOrName) == -1) {
-		throw new Error("Packet header must be a name or number id.")
-	}
+    if (typeof headerIdOrName == "string") {
+        if (typeof direction != "undefined") {
+            headerId = ExecuteScript.headerIdFromName(direction, headerIdOrName)
+            if (headerId == -1) {
+                throw new Error("Unknown header id for " + headerIdOrName)
+            }
+        } else {
+            throw new Error("Cannot define the header id without the current direction.")
+        }
+    } else if (["undefined", "number"].indexOf(typeof headerIdOrName) == -1) {
+        throw new Error("Packet header must be a name or number id.")
+    }
 
-	if (bytesOrObjects != null) {
-		return PacketConverter.create(headerId, bytesOrObjects);
-	} else if (headerId != null) {
-		return PacketConverter.create(headerId);
-	}
+    if (bytesOrObjects != null) {
+        return PacketConverter.create(headerId, bytesOrObjects);
+    } else if (headerId != null) {
+        return PacketConverter.create(headerId);
+    }
 }
 
 /**
@@ -282,7 +282,7 @@ function HPacket(headerIdOrName, bytesOrObjects, direction) {
  * @returns {GEarthHPacket}
  */
 function HPacketToServer(headerName, bytesOrObjects) {
-	return HPacket(headerName, bytesOrObjects, TOSERVER)
+    return HPacket(headerName, bytesOrObjects, TOSERVER)
 }
 
 /**
@@ -293,7 +293,7 @@ function HPacketToServer(headerName, bytesOrObjects) {
  * @returns {GEarthHPacket}
  */
 function HPacketToClient(headerName, bytesOrObjects) {
-	return HPacket(headerName, bytesOrObjects, TOCLIENT)
+    return HPacket(headerName, bytesOrObjects, TOCLIENT)
 }
 
 function getBytes(packet) {
