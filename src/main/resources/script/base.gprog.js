@@ -1,7 +1,7 @@
 load("nashorn:mozilla_compat.js");
 importPackage("G_Earth.GProgrammer");
 
-print('Welocme to ECMAScript 5.1 world!\n');
+print('Welocme to ECMAScript 6 world!\n');
 
 function loadScript(name) {
 	if (name == undefined) return

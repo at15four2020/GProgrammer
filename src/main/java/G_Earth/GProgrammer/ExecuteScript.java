@@ -8,6 +8,7 @@ import gearth.misc.harble_api.HarbleAPI.HarbleMessage;
 import gearth.protocol.HMessage;
 import gearth.protocol.HPacket;
 import gearth.protocol.HMessage.Direction;
+import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 
 public class ExecuteScript {
 
@@ -22,9 +23,9 @@ public class ExecuteScript {
     }
 
     // create a script engine manager
-    private ScriptEngineManager factory = new ScriptEngineManager();
+    private NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
     // create a JavaScript engine
-    private ScriptEngine engine = factory.getEngineByName("JavaScript");
+    private ScriptEngine engine = factory.getScriptEngine("--language=es6");
 
     ;
     
