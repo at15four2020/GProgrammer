@@ -88,7 +88,7 @@ public class GProgrammer extends ExtensionForm {
     }
 
     private void handleSend(Direction side, HPacket packet) {
-        looger.append("\nENVIADO!\n\n");
+        looger.append("\n== PACKAGE SENT ("+side+")!==\n\n");
         switch (side) {
             case TOCLIENT:
                 sendToClient(packet);
