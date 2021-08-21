@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import javax.script.ScriptException;
 
@@ -43,6 +45,8 @@ public class GProgrammer extends ExtensionForm {
     private ScriptOutput looger = new ScriptOutput(this::updateLog);
     private ExecuteScript runningScript = new ExecuteScript(this::startIntercept, this::handleSend, looger);
     private List<String> intercepting = new ArrayList<String>();
+
+    private int OUTPUT_MAX_LINES = 500;
 
     public static void main(String[] args) {
         runExtensionForm(args, GProgrammer.class);
@@ -247,11 +251,25 @@ public class GProgrammer extends ExtensionForm {
 
     public void updateLog(String s, Boolean append) {
         if (append) {
-            outputText.appendText(s);
+            outputText.appendText("\n"+s);
+            outputText.appendText("");
         } else {
             outputText.setText(s);
             outputText.appendText("");
         }
+
+        String currentText = outputText.getText().trim();
+        String[] linesArray = currentText.split("\n");
+        List<String> linesList = new LinkedList<String>(Arrays.asList(linesArray));
+
+        while (linesList.size() > OUTPUT_MAX_LINES) {
+            linesList.remove(0);
+        }
+
+        String cappedText = String.join("\n", linesList).trim();
+
+        outputText.setText(cappedText);
+        outputText.appendText("");
     }
 
 }
