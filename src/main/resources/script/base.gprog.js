@@ -9,6 +9,31 @@ function loadScript(name) {
     load('classpath:script/' + name + '.gprog.js');
 }
 
+function loadText(url) {
+    // Using JavaImporter to resolve classes
+    // from specified java packages within the
+    // 'with' statement below
+ 
+    with (new JavaImporter(java.io, java.net)) {
+        // more or less regular java code except for static types
+        var is = new URL(url).openStream();
+        try {
+            var reader = new BufferedReader(
+                new InputStreamReader(is));
+            var buf = '', line = null;
+            while ((line = reader.readLine()) != null) {
+                buf += line;
+            }
+        } finally {
+            reader.close();
+        }
+        return buf;
+    }
+}
+function loadJson(url) {
+    return JSON.parse(loadText(url));
+}
+
 function clear() {
     ExecuteScript.sw.clear()
 }
