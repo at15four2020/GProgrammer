@@ -31,7 +31,7 @@ import gearth.protocol.HMessage.Direction;
 @ExtensionInfo(
         Title = "GProgrammer",
         Description = "Simple extension to let you create scripts",
-        Version = "1.5.alfa",
+        Version = "1.5",
         Author = "at15four2020"
 )
 public class GProgrammer extends ExtensionForm {
