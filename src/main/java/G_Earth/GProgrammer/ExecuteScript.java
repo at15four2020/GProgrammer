@@ -27,8 +27,6 @@ public class ExecuteScript {
     // create a JavaScript engine
     private ScriptEngine engine = factory.getScriptEngine("--language=es6");
 
-    ;
-    
     public ExecuteScript(HandleIntercept inter, HandleSend send, ScriptOutput sw) {
         ExecuteScript.inter = inter;
         ExecuteScript.send = send;
@@ -45,6 +43,7 @@ public class ExecuteScript {
 
     public static ScriptOutput sw;
     private static PacketInfoManager packetInfoManager;
+    public static String host;
 
     public static Integer headerIdFromName(Direction side, String name) {
         PacketInfo message = packetInfoManager.getPacketInfoFromName(side, name);
@@ -90,6 +89,10 @@ public class ExecuteScript {
             sb.append(String.format("%02X ", b));
         }
         return sb.toString();
+    }
+
+    public void setHost(String host) {
+        ExecuteScript.host = host;
     }
 
 }

@@ -76,6 +76,7 @@ public class GProgrammer extends ExtensionForm {
     protected void initExtension() {
         onConnect((host, port, hotelversion, clientIdentifier, clientType, packetInfoManager) -> {
             runningScript.setPacketInfoManager(packetInfoManager);
+            runningScript.setHost(host);
         });
     }
 

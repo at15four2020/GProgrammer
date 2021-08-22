@@ -299,3 +299,5 @@ function HPacketToClient(headerName, bytesOrObjects) {
 function getBytes(packet) {
     return ExecuteScript.getBytes(packet)
 }
+
+const HOST = ExecuteScript.host
